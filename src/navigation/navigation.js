@@ -19,7 +19,7 @@ export default function NavigationStack() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        <Stack.Screen name="PokemonHome" component={PokemonHome} />
+        {/* <Stack.Screen name="PokemonHome" component={PokemonHome} /> */}
         
         <Stack.Screen name="Note" component={Home}
           options={{ headerRight: () => (<FontAwesome name="sticky-note-o" size={24} color="#000" style={{ marginRight: 20 }} />) }} />

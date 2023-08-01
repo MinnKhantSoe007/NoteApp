@@ -5,13 +5,19 @@ export default (keyName) => {
   const [oldValue, setOldValue] = useState([]);
 
   useEffect(() => {
-    AsyncStorage.getItem(keyName).then(res => setOldValue(JSON.parse(res)));
+    AsyncStorage.getItem(keyName).then(res => {
+      if (res !== null) {
+        setOldValue(JSON.parse(res))
+      }
+    });
   }, []);
 
   const setNewValue = (newData, isResetList = false) => {
     const totalList = isResetList ? [...newData] : [...oldValue, newData]
 
-    AsyncStorage.setItem(keyName, JSON.stringify(totalList));
+    AsyncStorage.setItem(keyName, JSON.stringify(totalList)).then(() => {
+      setOldValue(totalList)
+    })
   }
 
   return [oldValue, setNewValue]

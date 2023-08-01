@@ -1,62 +1,62 @@
-import { View, Text, Style } from "react-native";
-import React, { useEffect, useState } from "react";
-import pokemonServices from "../../services/pokemonServices";
-import { FlatList } from "react-native-gesture-handler";
-import { useIsFocused } from "@react-navigation/native";
-import { StyleSheet } from "react-native";
-import { Button } from "react-native-paper";
+// import { View, Text, Style } from "react-native";
+// import React, { useEffect, useState } from "react";
+// import pokemonServices from "../../services/pokemonServices";
+// import { FlatList } from "react-native-gesture-handler";
+// import { useIsFocused } from "@react-navigation/native";
+// import { StyleSheet } from "react-native";
+// import { Button } from "react-native-paper";
 
 
-export const PokemonHome = ({navigation}) => {
+// export const PokemonHome = ({navigation}) => {
 
-  const [pokemonList, setPokemonList] = useState();
-  const isFocus = useIsFocused();
+//   const [pokemonList, setPokemonList] = useState();
+//   const isFocus = useIsFocused();
 
-  useEffect(() => {
-    if (isFocus)
-    pokemonServices.getPokemonList().then((res) => {
-      console.log( "Pokemon", res.data);
-      setPokemonList(res.data.results)
+//   useEffect(() => {
+//     if (isFocus)
+//     pokemonServices.getPokemonList().then((res) => {
+//       console.log( "Pokemon", res.data);
+//       setPokemonList(res.data.results)
 
-    })
-  }, [isFocus] );
+//     })
+//   }, [isFocus] );
 
-  const renderPokemonItem = (item) => {
-    console.log("item", item)
-    return (
+//   const renderPokemonItem = (item) => {
+//     console.log("item", item)
+//     return (
 
-      <View>
-        <Text style={styles.pokemon_name}> Name: {item.item.name}</Text>
-      </View>
+//       <View>
+//         <Text style={styles.pokemon_name}> Name: {item.item.name}</Text>
+//       </View>
       
-    )
+//     )
     
-  };
+//   };
 
-  return (
-    <View>
-      <Text>The Names Are: </Text>
+//   return (
+//     <View>
+//       <Text>The Names Are: </Text>
 
-      <FlatList
-            data={pokemonList}
-        renderItem={renderPokemonItem}
-      />
+//       <FlatList
+//             data={pokemonList}
+//         renderItem={renderPokemonItem}
+//       />
 
-      <Button onPress = {()=>navigation.navigate("Note")}> Go To Note </Button>
+//       <Button onPress = {()=>navigation.navigate("Note")}> Go To Note </Button>
       
-    </View>
-  )
-}
+//     </View>
+//   )
+// }
 
 
-export const styles = StyleSheet.create({
+// export const styles = StyleSheet.create({
 
-  pokemon_name: {
-  paddingTop: 10
-}
-
-
+//   pokemon_name: {
+//   paddingTop: 10
+// }
 
 
 
-});
+
+
+// });

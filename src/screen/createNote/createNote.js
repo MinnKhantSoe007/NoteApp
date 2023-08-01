@@ -23,7 +23,6 @@ export default function CreateNote({ navigation }) {
   };
 
   const handleSubmit = async () => {
-
     setNewNote({ id: Date.now(), title: noteTitle, body: noteBody })
     navigation.navigate("Note");
 
