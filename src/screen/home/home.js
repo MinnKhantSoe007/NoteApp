@@ -9,6 +9,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { Checkbox } from 'react-native-paper';
 import useAsyncHelper from '../../hook/custom/useAsyncHelper';
 import { Feather } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export function Home({ navigation, route }) {
 
@@ -16,17 +17,16 @@ export function Home({ navigation, route }) {
   const [searchNote, setSearchNote] = useState('');
   const [task, setTask] = useState();
   const [searchTask, setSearchTask] = useState('');
-  const [checkedItems, setCheckedItems] = useState([]);
+  // const [checkedItems, setCheckedItems] = useState([]);
   const [noResult, setNoResult] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
   const [oldTaskList, setTaskList] = useAsyncHelper('taskList');
+  const [logo, setLogo] = useState(true);
   const isFocus = useIsFocused();
-  const numColumns = 2;
 
   useEffect(() => {
-
     getNoteList(),
-      getTaskList()
+    getTaskList()
 
   }, [isFocus]);
 
@@ -81,13 +81,16 @@ export function Home({ navigation, route }) {
     }
   };
 
+  const onLogoChangeHandler = () => {
+    setLogo(!logo);
+  };
 
   const renderNoteItem = ({ item }) => {
     return (
 
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('EditNote', { item })} >
-          <View style={styles.note}>
+          <View style={logo ? styles.note : styles.grid_note}>
             <Text style={styles.note_title}>{item.title}</Text>
             <Text style={styles.note_body}>{item.body}</Text>
           </View>
@@ -120,8 +123,15 @@ export function Home({ navigation, route }) {
 
       <EvilIcons name="search" size={40} style={styles.note_search_icon} />
 
-      {activeTab == 1 ?
-        <Feather name="grid" size={30} style={styles.note_grid_icon} /> : null }
+      <TouchableOpacity onPress={onLogoChangeHandler} style={styles.grid_container}>
+
+        {activeTab == 1 ?
+          logo == true ?
+            <Feather name="grid" size={30} style={styles.note_grid_icon} />
+            : <FontAwesome5 name="equals" size={30} style={styles.note_grid_icon} />
+          : null}
+
+      </TouchableOpacity>
 
       <View style={styles.search}>
         <TextInput style={{ color: '#000' }} placeholder=' Search... ' placeholderTextColor={'#000'} onChangeText={activeTab == 1 ? handleOnNoteSearch : handleOnTaskSearch} />
@@ -146,7 +156,8 @@ export function Home({ navigation, route }) {
             renderItem={renderNoteItem}
             keyExtractor={item => item.id.toString()}
             ListEmptyComponent={() => <Text style={{ textAlign: 'center', marginVertical: 30, fontSize: 35 }}> No Notes Found </Text>}
-            numColumns={2}
+            numColumns={logo ? 2 : 1}
+            key={logo ? '_': '#'}
             showsVerticalScrollIndicator={false}
           />
 

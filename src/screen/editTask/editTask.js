@@ -71,7 +71,7 @@ export default function EditTask({ navigation, route }) {
 
 
       <View style={styles.create_task}>
-        <TextInput placeholder='Edit Task' onChangeText={handleOnChangeTask}>
+        <TextInput placeholder='Edit Task' onChangeText={handleOnChangeTask} multiline>
           <Text>{item.task}</Text>
         </TextInput>
       </View>

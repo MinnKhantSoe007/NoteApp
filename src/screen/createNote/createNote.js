@@ -33,11 +33,11 @@ export default function CreateNote({ navigation }) {
     < SafeAreaView >
 
       <View style={styles.create_title}>
-        <TextInput placeholder='Create Note Title' value={noteTitle} onChangeText={handleOnChangeTitle} />
+        <TextInput placeholder='Create Note Title' value={noteTitle} onChangeText={handleOnChangeTitle} multiline/>
       </View>
 
       <View style={styles.create_body}>
-        <TextInput placeholder='Create Note Body' value={noteBody} onChangeText={handleOnChangeBody} />
+        <TextInput placeholder='Create Note Body' value={noteBody} onChangeText={handleOnChangeBody} multiline/>
       </View>
 
       <TouchableOpacity onPress={handleSubmit} style={styles.note_create_button}>

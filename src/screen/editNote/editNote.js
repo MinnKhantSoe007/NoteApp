@@ -78,13 +78,13 @@ export default function EditNote({ navigation, route }) {
       </Modal>
 
       <View style={styles.create_title}>
-        <TextInput placeholder='Edit Note Title' onChangeText={handleOnChangeTitle}>
+        <TextInput placeholder='Edit Note Title' onChangeText={handleOnChangeTitle} multiline>
           <Text>{item.title}</Text>
         </TextInput>
       </View>
 
       <View style={styles.create_body}>
-        <TextInput placeholder='Edit Note Body' onChangeText={handleOnChangeBody}>
+        <TextInput placeholder='Edit Note Body' onChangeText={handleOnChangeBody} multiline>
           <Text>{item.body}</Text>
         </TextInput>
       </View>

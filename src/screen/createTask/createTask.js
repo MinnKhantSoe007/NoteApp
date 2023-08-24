@@ -29,7 +29,7 @@ export default function CreateTask({ navigation }) {
     < SafeAreaView >
 
       <View style={styles.create_task}>
-        <TextInput placeholder='Create Task' value={task} onChangeText={handleOnChangeTask} />
+        <TextInput placeholder='Create Task' value={task} onChangeText={handleOnChangeTask} multiline/>
       </View>
 
       <TouchableOpacity onPress={handleSubmit} style={styles.task_create_button}>

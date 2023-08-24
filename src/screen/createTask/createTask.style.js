@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginHorizontal: 10,
     borderRadius: 50,
-    marginBottom: 20
+    marginBottom: 20,
+    paddingVertical: 5
   },
 
   task_create_button: {

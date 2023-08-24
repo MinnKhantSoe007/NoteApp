@@ -49,6 +49,7 @@ export const styles = StyleSheet.create({
     zIndex: 995,
     color: '#1aa7ec',
     paddingLeft: 55,
+    paddingRight: 60,
   },
 
   note_search_icon: {
@@ -59,12 +60,15 @@ export const styles = StyleSheet.create({
     zIndex: 996
   },
 
-  note_grid_icon: {
-    color: '#1aa7ec',
+  grid_container: {
+    zIndex: 996,
     position: 'absolute',
     top: 29,
-    right: '12%',
-    zIndex: 996
+    right: '10%'
+  },
+
+  note_grid_icon: {
+    color: '#1aa7ec',
   },
 
   text: {
@@ -160,6 +164,15 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     paddingVertical: 10
   },
+
+  grid_note: {
+    borderRadius: 13,
+    marginBottom: 20,
+    width: 385,
+    marginHorizontal: 15,
+    borderColor: '#1aa7ec',
+    borderWidth: 1,
+  }
 
 
 });
