@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, Text, TouchableOpacity, TextInput, View, FlatList } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, TextInput, View, FlatList, ToastAndroid } from 'react-native';
 import { useState, useEffect } from 'react';
 import { EvilIcons } from '@expo/vector-icons';
 import { styles } from './home.style';
@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import { Checkbox } from 'react-native-paper';
 import useAsyncHelper from '../../hook/custom/useAsyncHelper';
+import { Feather } from '@expo/vector-icons';
 
 export function Home({ navigation, route }) {
 
@@ -56,8 +57,12 @@ export function Home({ navigation, route }) {
       return getNoteList();
     }
 
-    const filteredNotes = noteList.filter(n => n.title.toLowerCase().includes(text.toLowerCase()));
-    setNoteList([...filteredNotes])
+    if (noteList) {
+      const filteredNotes = noteList.filter(n => n.title.toLowerCase().includes(text.toLowerCase()));
+      setNoteList([...filteredNotes])
+    } else {
+      ToastAndroid.show("There is nothing to search", ToastAndroid.SHORT);
+    }
   };
 
   const handleOnTaskSearch = async text => {
@@ -68,8 +73,12 @@ export function Home({ navigation, route }) {
       return getTaskList();
     }
 
-    const filteredTasks = task.filter(t => t.task.toLowerCase().includes(text.toLowerCase()));
-    setTask([...filteredTasks])
+    if (task) {
+      const filteredTasks = task.filter(t => t.task.toLowerCase().includes(text.toLowerCase()));
+      setTask([...filteredTasks])
+    } else {
+      ToastAndroid.show("There is nothing to search", ToastAndroid.SHORT);
+    }
   };
 
 
@@ -93,7 +102,7 @@ export function Home({ navigation, route }) {
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('EditTask', { item })} >
           <View style={styles.list}>
-            <Text style={{ color: '#000', marginHorizontal: 40, fontSize: 15, }}>{item.task} </Text>
+            <Text style={{ color: '#000', marginHorizontal: 40, fontSize: 16 }}>{item.task} </Text>
             <View style={styles.checkbox} >
               <Checkbox status={item.isChecked ? "checked" : "unchecked"} onPress={() => { checkToggleItem(index) }} />
             </View>
@@ -110,6 +119,9 @@ export function Home({ navigation, route }) {
       <StatusBar style="auto" />
 
       <EvilIcons name="search" size={40} style={styles.note_search_icon} />
+
+      {activeTab == 1 ?
+        <Feather name="grid" size={30} style={styles.note_grid_icon} /> : null }
 
       <View style={styles.search}>
         <TextInput style={{ color: '#000' }} placeholder=' Search... ' placeholderTextColor={'#000'} onChangeText={activeTab == 1 ? handleOnNoteSearch : handleOnTaskSearch} />
@@ -134,7 +146,8 @@ export function Home({ navigation, route }) {
             renderItem={renderNoteItem}
             keyExtractor={item => item.id.toString()}
             ListEmptyComponent={() => <Text style={{ textAlign: 'center', marginVertical: 30, fontSize: 35 }}> No Notes Found </Text>}
-            numColumns={numColumns}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
           />
 
         </View>
@@ -154,6 +167,7 @@ export function Home({ navigation, route }) {
             renderItem={renderTaskItem}
             keyExtractor={item => item.id.toString()}
             ListEmptyComponent={() => <Text style={{ textAlign: 'center', marginVertical: 30, fontSize: 35 }}> No Tasks Found </Text>}
+            showsVerticalScrollIndicator={false}
           />
 
         </View>

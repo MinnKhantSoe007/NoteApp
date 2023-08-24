@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dddd',
+    backgroundColor: '#fff',
     color: 'white',
   },
 
@@ -38,24 +38,32 @@ export const styles = StyleSheet.create({
 
   search: {
     position: 'absolute',
-    backgroundColor: '#fff',
+    backgroundColor: '#ddd',
     paddingHorizontal: 15,
     paddingVertical: 10,
-    width: 330,
+    width: 360,
     borderRadius: 60,
-    left: 30,
+    left: 25,
     top: -10,
     marginTop: 30,
     zIndex: 995,
     color: '#1aa7ec',
-    paddingLeft: 50,
+    paddingLeft: 55,
   },
 
   note_search_icon: {
     color: '#1aa7ec',
     position: 'absolute',
-    top: 28,
-    right: 305,
+    top: 26,
+    right: '80%',
+    zIndex: 996
+  },
+
+  note_grid_icon: {
+    color: '#1aa7ec',
+    position: 'absolute',
+    top: 29,
+    right: '12%',
     zIndex: 996
   },
 
@@ -96,7 +104,7 @@ export const styles = StyleSheet.create({
 
   list: {
     position: 'relative',
-    backgroundColor: '#ffff',
+    backgroundColor: '#ddd',
     width: 330,
     marginBottom: 30,
     paddingVertical: 30,
@@ -119,30 +127,38 @@ export const styles = StyleSheet.create({
     marginTop: 200,
     position: 'relative',
     marginBottom: 90,
-    width: 410
+    width: 415
   },
 
   note: {
-    backgroundColor: '#fff',
     borderRadius: 13,
     marginBottom: 20,
-    width: 160,
+    width: 165,
     marginHorizontal: 22,
+    borderColor: '#1aa7ec',
+    borderWidth: 1,
   },
 
   note_title: {
     fontSize: 25,
-    paddingLeft: 10,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    paddingLeft: 15,
+    borderTopLeftRadius: 13,
+    borderTopRightRadius: 13,
     color: '#000',
-    backgroundColor: '#fff'
+    backgroundColor: '#ddd',
+    borderBottomWidth: 1,
+    borderColor: '#1aa7ec',
+    marginBottom: 10,
+    paddingVertical: 10,
+    fontWeight: 500,
   },
 
   note_body: {
     fontSize: 20,
-    paddingLeft: 10,
+    paddingLeft: 15,
     color: '#000',
+    marginBottom: 10,
+    paddingVertical: 10
   },
 
 
