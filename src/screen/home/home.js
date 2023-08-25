@@ -17,8 +17,7 @@ export function Home({ navigation, route }) {
   const [searchNote, setSearchNote] = useState('');
   const [task, setTask] = useState();
   const [searchTask, setSearchTask] = useState('');
-  // const [checkedItems, setCheckedItems] = useState([]);
-  const [noResult, setNoResult] = useState(false);
+  // const [noResult, setNoResult] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
   const [oldTaskList, setTaskList] = useAsyncHelper('taskList');
   const [logo, setLogo] = useState(true);
@@ -28,15 +27,15 @@ export function Home({ navigation, route }) {
     getNoteList(),
     getTaskList()
 
-  }, [isFocus]);
+  }, [isFocus]); // isFocus is used to determine what to render note or task based on the focused screen without the need of refreshing since normally, u need to refresh to rerender
 
   const noteTab = () => { setActiveTab(1) }
   const taskTab = () => { setActiveTab(2) }
 
   const checkToggleItem = (index) => {
-    task[index].isChecked = !task[index].isChecked;
-    setTask([...task]);
-    setTaskList([...task], true);
+    task[index].isChecked = !task[index].isChecked; // to check and uncheck
+    setTask([...task]); // update task with check and uncheck state (without async)
+    setTaskList([...task], true); // update new task with check and uncheck state (with async)
   };
 
   const getNoteList = async () => {
@@ -53,7 +52,7 @@ export function Home({ navigation, route }) {
     setSearchNote(text);
     if (!text) {
       setSearchNote('');
-      setNoResult(false)
+      // setNoResult(false)
       return getNoteList();
     }
 
@@ -69,23 +68,22 @@ export function Home({ navigation, route }) {
     setSearchTask(text);
     if (!text) {
       setSearchTask('');
-      setNoResult(false)
-      return getTaskList();
+      return getTaskList(); // so that all the data will be displayed if we r not searching anymore
     }
 
     if (task) {
-      const filteredTasks = task.filter(t => t.task.toLowerCase().includes(text.toLowerCase()));
-      setTask([...filteredTasks])
+      const filteredTasks = task.filter(t => t.task.toLowerCase().includes(text.toLowerCase())); // filter it so that only the task with the matching words as the text remains
+      setTask([...filteredTasks]); // only the filtered tasks will be displayed
     } else {
       ToastAndroid.show("There is nothing to search", ToastAndroid.SHORT);
     }
   };
 
   const onLogoChangeHandler = () => {
-    setLogo(!logo);
+    setLogo(!logo); // change logo to opposite
   };
 
-  const renderNoteItem = ({ item }) => {
+  const renderNoteItem = ({ item }) => { // got grom note flatlist
     return (
 
       <View>
@@ -99,7 +97,7 @@ export function Home({ navigation, route }) {
     )
   };
 
-  const renderTaskItem = ({ item, index }) => {
+  const renderTaskItem = ({ item, index }) => { // got grom task flatlist
     return (
 
       <View>
@@ -154,10 +152,10 @@ export function Home({ navigation, route }) {
           <FlatList
             data={noteList}
             renderItem={renderNoteItem}
-            keyExtractor={item => item.id.toString()}
-            ListEmptyComponent={() => <Text style={{ textAlign: 'center', marginVertical: 30, fontSize: 35 }}> No Notes Found </Text>}
+            keyExtractor={item => item.id.toString()} // since we named it item here, we have to use the word item in renderNoteItem too
+            ListEmptyComponent={() => <Text style={{ textAlign: 'center', marginVertical: 30, fontSize: 35 }}> No Notes Found </Text>} // appear when there is nothing in data
             numColumns={logo ? 2 : 1}
-            key={logo ? '_': '#'}
+            key={logo ? '_': '#'} // had to add this to change the num column dynamically
             showsVerticalScrollIndicator={false}
           />
 

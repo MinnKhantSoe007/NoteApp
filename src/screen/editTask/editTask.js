@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from "react";
 
 export default function EditTask({ navigation, route }) {
-  const { item } = route.params;
+  const { item } = route.params; // got data from the note screen so that we know which item is pressed
   const [task, setTask] = useState(item?.task);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,12 +17,12 @@ export default function EditTask({ navigation, route }) {
   };
 
   const deleteTask = async (activeTab) => {
-    const result = await AsyncStorage.getItem('taskList');
-    let tasks = [];
-    if (result !== null) tasks = JSON.parse(result)
+    const result = await AsyncStorage.getItem('taskList'); // first get the lists of task
+    let tasks = []; // let a veriable named tasks to be an empty array
+    if (result !== null) tasks = JSON.parse(result) // add the task lists to the tasks only if the result is not null
 
-    const newTasks = tasks.filter(n => n.id !== item.id)
-    await AsyncStorage.setItem('taskList', JSON.stringify(newTasks))
+    const newTasks = tasks.filter(n => n.id !== item.id) // filter it so that all the unmatched ids are chosen and only the correct item filtered away 
+    await AsyncStorage.setItem('taskList', JSON.stringify(newTasks)) // make the newNotes the final notes
     navigation.navigate("Note", activeTab == 2);
   };
 
@@ -31,8 +31,8 @@ export default function EditTask({ navigation, route }) {
     let tasks = [];
     if (result !== null) tasks = JSON.parse(result)
 
-    const newTasks = tasks.findIndex(n => n.id == item.id)
-    tasks[newTasks].task = task
+    const newTasks = tasks.findIndex(n => n.id == item.id) // only the matched id note will be modified
+    tasks[newTasks].task = task // inside the tasks, there is a newTasks and only the newTasks will be updated
     await AsyncStorage.setItem('taskList', JSON.stringify(tasks));
     navigation.navigate("Note", activeTab == 2);
   }
@@ -41,11 +41,11 @@ export default function EditTask({ navigation, route }) {
 
     < SafeAreaView >
 
-
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
+        hardwareAccelerated
       >
 
         <View style={styles.centeredView}>
@@ -66,10 +66,7 @@ export default function EditTask({ navigation, route }) {
         </View>
 
       </Modal>
-
-
-
-
+      
       <View style={styles.create_task}>
         <TextInput placeholder='Edit Task' onChangeText={handleOnChangeTask} multiline>
           <Text>{item.task}</Text>

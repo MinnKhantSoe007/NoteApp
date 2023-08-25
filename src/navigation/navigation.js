@@ -8,7 +8,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import EditTask from '../screen/editTask/editTask';
-import { PokemonHome } from '../screen/pokemonHome/pokemonHome';
 
 const Stack = createStackNavigator();
 
@@ -18,8 +17,6 @@ export default function NavigationStack() {
 
     <NavigationContainer>
       <Stack.Navigator>
-
-        {/* <Stack.Screen name="PokemonHome" component={PokemonHome} /> */}
         
         <Stack.Screen name="Note" component={Home}
           options={{ headerRight: () => (<FontAwesome name="sticky-note-o" size={24} color="#000" style={{ marginRight: 20 }} />) }} />

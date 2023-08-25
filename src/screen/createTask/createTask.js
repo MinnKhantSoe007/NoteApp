@@ -1,5 +1,4 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./createTask.style";
@@ -13,15 +12,11 @@ export default function CreateTask({ navigation }) {
 
   const handleOnChangeTask = text => {
     setTask(text);
-    console.log("Task", text)
   };
 
-
   const handleSubmit = async (activeTab) => {
-
-    setNewTask({ id: Date.now(), task: task, isChecked: false });
+    setNewTask({ id: Date.now(), task: task, isChecked: false }); // creating and adding the task to the storage using the async
     navigation.navigate("Note", activeTab == 2);
-
   };
 
   return (
